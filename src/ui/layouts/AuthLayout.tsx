@@ -16,7 +16,7 @@ export function AuthLayout() {
           src={illustration}
           className='object-cover rounded-[32px] w-full h-full max-w-[656px] max-h-[960px] select-none'
         />
-        <div className='bottom-8 max-w-[656px] absolute p-10 rounded-b-[32px] bg-white'>
+        <div className='bottom-8 mx-8 max-w-[656px] absolute p-10 rounded-b-[32px] bg-white'>
           <Logo className='text-teal-900 h-8' />
           <p className='text-gray-700 font-medium text-xl mt-6'>
             Gerencie suas finanças pessoais de uma forma simples com o fincheck,
