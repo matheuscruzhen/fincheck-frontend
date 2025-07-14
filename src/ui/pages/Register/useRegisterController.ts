@@ -1,9 +1,10 @@
-import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { httpClient } from '../../../app/services/httpClient';
+import { authService } from '../../../app/services/authService';
 
 const schema = z.object({
+  name: z.string().nonempty('Nome é obrigatório'),
   email: z.string().nonempty('E-mail é obrigatório').email('E-mail inválido'),
   password: z
     .string()
@@ -13,18 +14,19 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export function useLoginController() {
+export function useRegisterController() {
   const {
-    handleSubmit: hookFormHandleSubmit,
+    handleSubmit: hookFormSubmit,
     register,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
 
-  const handleSubmit = hookFormHandleSubmit(async (data) => {
-    await httpClient.post('/auth/signin', data);
+  const handleSubmit = hookFormSubmit(async (data) => {
+    const { accessToken } = await authService.signup(data);
+    console.log(accessToken);
   });
 
-  return { errors, handleSubmit, register };
+  return { handleSubmit, register, errors };
 }
