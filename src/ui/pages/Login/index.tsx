@@ -2,9 +2,10 @@ import { Link } from 'react-router';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { useLoginController } from './useLoginController';
+import { Spinner } from '../../components/Spinner';
 
 export function Login() {
-  const { errors, handleSubmit, register } = useLoginController();
+  const { errors, handleSubmit, register, isLoading } = useLoginController();
   return (
     <div>
       <header className='flex flex-col text-center gap-4 items-center'>
@@ -36,7 +37,7 @@ export function Login() {
           {...register('password')}
         />
         {/* {errors.password && <span>{errors.password.message}</span>} */}
-        <Button type='submit' className='mt-2'>
+        <Button type='submit' isLoading={isLoading} className='mt-2'>
           Entrar
         </Button>
       </form>
