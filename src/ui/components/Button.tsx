@@ -10,6 +10,7 @@ export function Button({
   className,
   isLoading,
   disabled,
+  children,
   ...props
 }: ButtonProps) {
   return (
@@ -22,7 +23,7 @@ export function Button({
          disabled:text-gray-400 disabled:cursor-not-allowed flex justify-center items-center`,
         className
       )}>
-      {!isLoading && <p>Entrar</p>}
+      {!isLoading && <p>{children}</p>}
       {isLoading && <Spinner className='w-6 h-6' />}
     </button>
   );
