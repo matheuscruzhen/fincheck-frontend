@@ -2,7 +2,7 @@
 
 @theme {
   /* Existing declarations you provided */
-  --font-display: 'Satoshi', 'sans-serif';
+  --font-display: 'DM Sans', 'sans-serif';
   --breakpoint-3xl: 1920px;
   --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
   --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
