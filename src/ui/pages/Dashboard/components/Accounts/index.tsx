@@ -16,17 +16,18 @@ export function Accounts() {
     areValuesVisible,
     toggleValuesVisibility,
     isLoading,
+    isInitialLoading,
     accounts,
   } = useAccountController();
 
   return (
     <div className='flex flex-col bg-teal-900 md:p-10 px-4 py-8 rounded-2xl w-full h-full'>
-      {isLoading && (
+      {isInitialLoading && (
         <div className='flex justify-center items-center w-full h-full'>
           <Spinner className='fill-white w-10 h-10 text-teal-950/50' />
         </div>
       )}
-      {!isLoading && (
+      {!isInitialLoading && (
         <>
           <div>
             <span className='block text-white tracking-[-0.5px]'>
