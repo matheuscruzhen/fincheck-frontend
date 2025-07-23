@@ -16,12 +16,12 @@ export function LaunchScreen({ isLoading }: LaunchScreenProps) {
       leave='transition-opacity duration-150'
       leaveFrom='opacity-100'
       leaveTo='opacity-0'>
-      <h1 className='bg-teal-900 fixed top-0 left-0 h-full w-full grid place-items-center'>
+      <div className='top-0 left-0 z-50 fixed place-items-center grid bg-teal-900 w-full h-full'>
         <div className='flex flex-col items-center gap-4'>
           <Logo className='h-10 text-white' />
           <Spinner className='fill-white text-teal-900' />
         </div>
-      </h1>
+      </div>
     </Transition>
   );
 }
