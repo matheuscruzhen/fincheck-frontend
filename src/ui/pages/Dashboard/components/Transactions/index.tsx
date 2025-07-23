@@ -1,15 +1,18 @@
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { ChevronDownIcon } from '@radix-ui/react-icons';
+import { formatCurrency } from '../../../../../app/utils/formatCurrency';
+import { MONTHS } from '../../../../../app/config/constants';
 import { TransactionsIcon } from '../../../../components/icons/TransactionsIcon';
 import { FilterIcon } from '../../../../components/icons/FilterIcon';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { MONTHS } from '../../../../../app/config/constants';
-import { cn } from '../../../../../app/utils/cn';
+import { CategoryIcon } from '../../../../components/icons/categories/CategoryIcon';
 import { SliderOption } from './SlideOption';
 import { SliderNavigation } from './SliderNavigation';
-import { formatCurrency } from '../../../../../app/utils/formatCurrency';
-import { CategoryIcon } from '../../../../components/icons/categories/CategoryIcon';
+import { cn } from '../../../../../app/utils/cn';
+import { useTransactions } from './useTransactions';
 
 export function Transactions() {
+  const { areValuesVisible } = useTransactions();
+
   return (
     <div className='flex flex-col bg-gray-100 p-10 rounded-2xl w-full h-full'>
       <header>
@@ -54,7 +57,11 @@ export function Transactions() {
               <span className='text-gray-600 text-sm'>04/06/2025</span>
             </div>
           </div>
-          <span className='font-medium text-green-800 tracking-[-0.5px]'>
+          <span
+            className={cn(
+              'font-medium text-green-800 tracking-[-0.5px]',
+              !areValuesVisible && 'blur-sm'
+            )}>
             + {formatCurrency(1000)}
           </span>
         </div>
@@ -68,7 +75,11 @@ export function Transactions() {
               <span className='text-gray-600 text-sm'>04/06/2025</span>
             </div>
           </div>
-          <span className='font-medium text-red-800 tracking-[-0.5px]'>
+          <span
+            className={cn(
+              'font-medium text-red-800 tracking-[-0.5px]',
+              !areValuesVisible && 'blur-sm'
+            )}>
             - {formatCurrency(1000)}
           </span>
         </div>

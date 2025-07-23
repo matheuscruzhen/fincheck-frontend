@@ -5,20 +5,33 @@ import { AccountCard } from './AccountCard';
 import 'swiper/swiper-bundle.css';
 import { SliderNavigation } from './SliderNavigation';
 import { useAccountController } from './useAccountController';
+import { cn } from '../../../../../app/utils/cn';
 
 export function Accounts() {
-  const { sliderState, setSliderState, windowWidth } = useAccountController();
+  const {
+    sliderState,
+    setSliderState,
+    windowWidth,
+    areValuesVisible,
+    toggleValuesVisibility,
+  } = useAccountController();
 
   return (
     <div className='flex flex-col bg-teal-900 md:p-10 px-4 py-8 rounded-2xl w-full h-full'>
       <div>
         <span className='block text-white tracking-[-0.5px]'>Saldo Total</span>
         <div className='flex items-center'>
-          <strong className='text-white text-2xl tracking-[-1px]'>
-            R$ 100,00
+          <strong
+            className={cn(
+              'text-white text-2xl tracking-[-1px]',
+              !areValuesVisible && 'blur-md'
+            )}>
+            R$ 1000,00
           </strong>
-          <button className='flex justify-center items-center w-8 h-8'>
-            <EyeIcon open />
+          <button
+            onClick={toggleValuesVisibility}
+            className='flex justify-center items-center w-8 h-8'>
+            <EyeIcon open={areValuesVisible} />
           </button>
         </div>
       </div>
