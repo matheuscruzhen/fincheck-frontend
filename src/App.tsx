@@ -4,7 +4,7 @@ import { Router } from './router';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './app/contexts/AuthContext';
 
-const queryCient = new QueryClient({
+const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       retry: false,
@@ -16,7 +16,7 @@ const queryCient = new QueryClient({
 
 export function App() {
   return (
-    <QueryClientProvider client={queryCient}>
+    <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <Router />
         <Toaster />
