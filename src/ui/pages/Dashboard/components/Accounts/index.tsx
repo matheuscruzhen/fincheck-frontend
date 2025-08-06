@@ -18,6 +18,7 @@ export function Accounts() {
     isLoading,
     isInitialLoading,
     accounts,
+    openNewAccountModal,
   } = useAccountController();
 
   return (
@@ -57,7 +58,9 @@ export function Accounts() {
                     Minhas Contas
                   </strong>
                 </div>
-                <button className='flex flex-col justify-center items-center gap-4 mt-4 border-2 border-teal-600 border-dashed rounded-2xl h-52 text-white'>
+                <button
+                  onClick={openNewAccountModal}
+                  className='flex flex-col justify-center items-center gap-4 mt-4 border-2 border-teal-600 border-dashed rounded-2xl h-52 text-white'>
                   <div className='flex justify-center items-center border-2 border-white border-dashed rounded-full w-11 h-11'>
                     <PlusIcon className='w-6 h-6' />
                   </div>

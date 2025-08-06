@@ -10,10 +10,18 @@ import { useTransactions } from './useTransactions';
 import { Spinner } from '../../../../components/Spinner';
 import emptyStateImage from '../../../../../assets/empty-state.svg';
 import { TransactionTypeDrowpdown } from './TransactionTypeDropdown';
+import { FiltersModal } from './FiltersModal';
 
 export function Transactions() {
-  const { areValuesVisible, isLoading, isInitialLoading, transactions } =
-    useTransactions();
+  const {
+    areValuesVisible,
+    isLoading,
+    isInitialLoading,
+    transactions,
+    isFiltersModalOpen,
+    handleCloseFiltersModal,
+    handleOpenFiltersModal,
+  } = useTransactions();
 
   const hasTransactions = transactions.length > 0;
 
@@ -26,10 +34,14 @@ export function Transactions() {
       )}
       {!isInitialLoading && (
         <>
+          <FiltersModal
+            open={isFiltersModalOpen}
+            onClose={handleCloseFiltersModal}
+          />
           <header>
             <div className='flex justify-between items-center'>
               <TransactionTypeDrowpdown />
-              <button>
+              <button onClick={handleOpenFiltersModal}>
                 <FilterIcon />
               </button>
             </div>
