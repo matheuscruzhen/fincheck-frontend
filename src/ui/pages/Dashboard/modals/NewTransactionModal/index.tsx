@@ -5,6 +5,7 @@ import Modal from '../../../../components/Modal';
 import { Select } from '../../../../components/Select';
 import { DatePickerInput } from '../../../../components/DatePickerInput';
 import { useNewTransactionModalController } from './useNewTransactionModalController';
+import { Button } from '../../../../components/Button';
 
 export function NewTransactionModal() {
   const {
@@ -53,6 +54,7 @@ export function NewTransactionModal() {
           />
           <ColorsDropdownInput />
           <DatePickerInput />
+          <Button>Criar</Button>
         </div>
       </form>
     </Modal>

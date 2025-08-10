@@ -1,3 +1,4 @@
+import type { BankAccountType } from '../../../../../app/types/BankAccountType';
 import { cn } from '../../../../../app/utils/cn';
 import { formatCurrency } from '../../../../../app/utils/formatCurrency';
 import { BankAccountTypeIcon } from '../../../../components/icons/BankAccountTypeIcon';
@@ -7,7 +8,7 @@ interface AccountCard {
   color: string;
   name: string;
   balance: number;
-  type: 'CASH' | 'CHECKING' | 'INVESTMENT';
+  type: BankAccountType;
 }
 
 export function AccountCard({ balance, color, name, type }: AccountCard) {
