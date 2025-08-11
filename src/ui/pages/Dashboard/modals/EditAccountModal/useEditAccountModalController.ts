@@ -6,7 +6,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { bankAccountsService } from '../../../../../app/services/bankAccountService';
 import type { BankAccountParams } from '../../../../../app/services/bankAccountService/create';
-import { currencyStringToNumber } from '../../../../../app/utils/currencyStringToNumber';
 
 const schema = z.object({
   initialBalance: z
@@ -19,8 +18,8 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-export function useNewAccountModalController() {
-  const { isNewAccountModalOpen, closeNewAccountModal } = useDashboard();
+export function useEditAccountModalController() {
+  const { isEditAccountModalOpen, closeEditAccountModal } = useDashboard();
 
   const {
     control,
@@ -50,7 +49,7 @@ export function useNewAccountModalController() {
         queryKey: ['bankAccounts'],
       });
       toast.success('Conta cadastrada com successo.');
-      closeNewAccountModal();
+      closeEditAccountModal();
       reset();
     } catch (error) {
       toast.error('Erro ao cadastrar a conta.');
@@ -61,9 +60,9 @@ export function useNewAccountModalController() {
     errors,
     control,
     isLoading,
-    isNewAccountModalOpen,
+    isEditAccountModalOpen,
     register,
     handleSubmit,
-    closeNewAccountModal,
+    closeEditAccountModal,
   };
 }

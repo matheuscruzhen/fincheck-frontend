@@ -9,7 +9,12 @@ export interface BankAccountParams {
 }
 
 interface BankAccountResponse {
-  accessToken: string;
+  id: string;
+  name: string;
+  initialBalance: number;
+  type: BankAccountType;
+  color: string;
+  currentBalance: number;
 }
 
 export async function create(params: BankAccountParams) {
