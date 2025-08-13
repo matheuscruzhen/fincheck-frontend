@@ -1,10 +1,10 @@
+import { useNewTransactionModalController } from './useNewTransactionModalController';
 import { ColorsDropdownInput } from '../../../../components/ColorsDropdownInput';
 import { Input } from '../../../../components/Input';
 import { InputCurrency } from '../../../../components/InputCurrency';
-import Modal from '../../../../components/Modal';
+import { Modal } from '../../../../components/Modal';
 import { Select } from '../../../../components/Select';
 import { DatePickerInput } from '../../../../components/DatePickerInput';
-import { useNewTransactionModalController } from './useNewTransactionModalController';
 import { Button } from '../../../../components/Button';
 
 export function NewTransactionModal() {

@@ -3,26 +3,51 @@ import { Button } from '../../../../components/Button';
 import { ColorsDropdownInput } from '../../../../components/ColorsDropdownInput';
 import { Input } from '../../../../components/Input';
 import { InputCurrency } from '../../../../components/InputCurrency';
-import Modal from '../../../../components/Modal';
+import { Modal } from '../../../../components/Modal';
 import { Select } from '../../../../components/Select';
 import { useEditAccountModalController } from './useEditAccountModalController';
+import { TrashIcon } from '../../../../components/icons/TrashIcon';
+import { DeleteConfirmationModal } from '../../../../components/DeleteConfirmationModal';
 
 export function EditAccountModal() {
   const {
     control,
     errors,
-    isLoading,
+    isLoadingUpdate,
+    isLoadingDelete,
+    isEditAccountModalOpen,
+    isDeleteAccountModalOpen,
     register,
     handleSubmit,
     closeEditAccountModal,
-    isEditAccountModalOpen,
+    handleOpenDeleteModal,
+    handleCloseDeleteModal,
+    handleDeleteAccount,
   } = useEditAccountModalController();
+
+  if (isDeleteAccountModalOpen) {
+    return (
+      <DeleteConfirmationModal
+        title='Tem certeza que deseja excluir essa conta?'
+        description='Ao excluir a conta, também serão excluídos todos os registros de
+        receita e despesas relacionados.'
+        isLoading={isLoadingDelete}
+        onClose={handleCloseDeleteModal}
+        onConfirm={handleDeleteAccount}
+      />
+    );
+  }
 
   return (
     <Modal
       title='Editar Conta'
       open={isEditAccountModalOpen}
-      onClose={closeEditAccountModal}>
+      onClose={closeEditAccountModal}
+      rightAction={
+        <button onClick={handleOpenDeleteModal}>
+          <TrashIcon className='w-6 h-6 text-red-900' />
+        </button>
+      }>
       <form onSubmit={handleSubmit}>
         <div>
           <span className='text-gray-600 text-sm tracking-[-0.5px]'>
@@ -83,8 +108,11 @@ export function EditAccountModal() {
             )}
           />
 
-          <Button type='submit' className='mt-6 w-full' isLoading={isLoading}>
-            Criar
+          <Button
+            type='submit'
+            className='mt-6 w-full'
+            isLoading={isLoadingUpdate}>
+            Salvar
           </Button>
         </div>
       </form>

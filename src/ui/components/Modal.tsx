@@ -11,7 +11,7 @@ interface ModalProps {
   rightAction?: React.ReactNode;
 }
 
-export default function Modal({
+export function Modal({
   children,
   open,
   title,

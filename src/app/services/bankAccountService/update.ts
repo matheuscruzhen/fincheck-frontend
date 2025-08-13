@@ -1,7 +1,8 @@
 import type { BankAccountType } from '../../types/BankAccountType';
 import { httpClient } from '../httpClient';
 
-export interface CreateBankAccountParams {
+export interface UpdateBankAccountParams {
+  id: string;
   name: string;
   initialBalance: number;
   color: string;
@@ -17,9 +18,9 @@ interface BankAccountResponse {
   currentBalance: number;
 }
 
-export async function create(params: CreateBankAccountParams) {
-  const { data } = await httpClient.post<BankAccountResponse>(
-    '/bank-accounts',
+export async function update({ id, ...params }: UpdateBankAccountParams) {
+  const { data } = await httpClient.put<BankAccountResponse>(
+    `/bank-accounts/${id}`,
     params
   );
   return data;

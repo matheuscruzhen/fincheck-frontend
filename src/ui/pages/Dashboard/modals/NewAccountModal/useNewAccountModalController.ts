@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { bankAccountsService } from '../../../../../app/services/bankAccountService';
-import type { BankAccountParams } from '../../../../../app/services/bankAccountService/create';
+import type { CreateBankAccountParams } from '../../../../../app/services/bankAccountService/create';
 import { currencyStringToNumber } from '../../../../../app/utils/currencyStringToNumber';
 
 const schema = z.object({
@@ -33,7 +33,7 @@ export function useNewAccountModalController() {
   });
 
   const { isPending: isLoading, mutateAsync } = useMutation({
-    mutationFn: async (data: BankAccountParams) => {
+    mutationFn: async (data: CreateBankAccountParams) => {
       return await bankAccountsService.create(data);
     },
   });
