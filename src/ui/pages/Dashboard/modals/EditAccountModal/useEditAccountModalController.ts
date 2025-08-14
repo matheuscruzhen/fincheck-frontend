@@ -5,9 +5,9 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import z from 'zod';
 import { useDashboard } from '../../components/DashboardContext/useDashboard';
-import { bankAccountsService } from '../../../../../app/services/bankAccountService';
+import { bankAccountsService } from '../../../../../app/services/bankAccountsService';
 import { currencyStringToNumber } from '../../../../../app/utils/currencyStringToNumber';
-import type { UpdateBankAccountParams } from '../../../../../app/services/bankAccountService/update';
+import type { UpdateBankAccountParams } from '../../../../../app/services/bankAccountsService/update';
 
 const schema = z.object({
   initialBalance: z.union([
@@ -69,7 +69,7 @@ export function useEditAccountModalController() {
         initialBalance: currencyStringToNumber(data.initialBalance),
       });
       queryClient.invalidateQueries({
-        queryKey: ['bankAccounts'],
+        queryKey: ['bank-accounts'],
       });
       toast.success('Conta atualizada com successo.');
       closeEditAccountModal();
@@ -89,7 +89,7 @@ export function useEditAccountModalController() {
     try {
       await deleteAccount(accountEdited!.id);
       queryClient.invalidateQueries({
-        queryKey: ['bankAccounts'],
+        queryKey: ['bank-accounts'],
       });
       toast.success('Conta excluída com successo.');
       close;
