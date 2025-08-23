@@ -1,15 +1,15 @@
 import z from 'zod';
-import { useDashboard } from '../../components/DashboardContext/useDashboard';
+import toast from 'react-hot-toast';
+import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDashboard } from '../../components/DashboardContext/useDashboard';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useBankAccounts } from '../../../../../app/hooks/useBankAccounts';
 import { useCategories } from '../../../../../app/hooks/useCategories';
-import { useMemo } from 'react';
-import { QueryClient, useMutation } from '@tanstack/react-query';
-import type { CreateTransactionParams } from '../../../../../app/services/transactionsService/create';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { transactionsService } from '../../../../../app/services/transactionsService';
-import toast from 'react-hot-toast';
 import { currencyStringToNumber } from '../../../../../app/utils/currencyStringToNumber';
+import type { CreateTransactionParams } from '../../../../../app/services/transactionsService/create';
 
 const schema = z.object({
   value: z.string().nonempty('Valor é obrigatório.'),
@@ -50,7 +50,7 @@ export function useNewTransactionModalController() {
     },
   });
 
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
   const handleSubmit = hookFormHandleSubmit(async (data) => {
     try {
       await mutateAsync({
