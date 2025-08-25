@@ -24,7 +24,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export function useEditAccountModalController() {
-  const { isEditAccountModalOpen, closeEditAccountModal, accountEdited } =
+  const { isEditAccountModalOpen, closeEditAccountModal, accountBeingEdited } =
     useDashboard();
 
   const {
@@ -35,10 +35,10 @@ export function useEditAccountModalController() {
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
-      initialBalance: accountEdited?.initialBalance,
-      name: accountEdited?.name,
-      type: accountEdited?.type,
-      color: accountEdited?.color,
+      initialBalance: accountBeingEdited?.initialBalance,
+      name: accountBeingEdited?.name,
+      type: accountBeingEdited?.type,
+      color: accountBeingEdited?.color,
     },
   });
 
@@ -65,7 +65,7 @@ export function useEditAccountModalController() {
     try {
       await updateAccount({
         ...data,
-        id: accountEdited!.id,
+        id: accountBeingEdited!.id,
         initialBalance: currencyStringToNumber(data.initialBalance),
       });
       queryClient.invalidateQueries({
@@ -87,7 +87,7 @@ export function useEditAccountModalController() {
 
   async function handleDeleteAccount() {
     try {
-      await deleteAccount(accountEdited!.id);
+      await deleteAccount(accountBeingEdited!.id);
       queryClient.invalidateQueries({
         queryKey: ['bank-accounts'],
       });
