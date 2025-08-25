@@ -30,6 +30,22 @@ export function useEditTransactionModalController(
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+  const {
+    control,
+    handleSubmit: hookFormHandleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      name: transaction?.name,
+      value: transaction?.value,
+      categoryId: transaction?.categoryId,
+      bankAccountId: transaction?.bankAccountId,
+      date: transaction ? new Date(transaction?.date) : new Date(),
+    },
+  });
+
   const { isPending: isLoading, mutateAsync: updateTransaction } = useMutation({
     mutationFn: async (data: UpdateTransactionParams) => {
       return await transactionsService.update(data);
@@ -49,22 +65,6 @@ export function useEditTransactionModalController(
     );
   }, [categoriesList]);
 
-  const {
-    control,
-    handleSubmit: hookFormHandleSubmit,
-    register,
-    formState: { errors },
-  } = useForm<FormData>({
-    resolver: zodResolver(schema),
-    defaultValues: {
-      name: transaction?.name,
-      value: transaction?.value,
-      categoryId: transaction?.categoryId,
-      bankAccountId: transaction?.bankAccountId,
-      date: transaction ? new Date(transaction?.date) : new Date(),
-    },
-  });
-
   const queryClient = useQueryClient();
 
   async function handleDeleteTransaction() {
@@ -73,6 +73,7 @@ export function useEditTransactionModalController(
       queryClient.invalidateQueries({
         queryKey: ['transactions'],
       });
+      queryClient.invalidateQueries({ queryKey: ['bank-accounts'] });
       transaction!.type === 'EXPENSE'
         ? toast.success('Despesa excluída com successo.')
         : toast.success('Receita excluída com successo.');
@@ -105,6 +106,7 @@ export function useEditTransactionModalController(
       queryClient.invalidateQueries({
         queryKey: ['transactions'],
       });
+      queryClient.invalidateQueries({ queryKey: ['bank-accounts'] });
       toast.success(
         transaction!.type === 'EXPENSE'
           ? 'Despesa alterada com successo.'

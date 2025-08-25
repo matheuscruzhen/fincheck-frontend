@@ -4,8 +4,10 @@ import toast from 'react-hot-toast';
 import { localStorageKeys } from '../config/localStorageKeys';
 import { usersService } from '../services/usersService';
 import { LaunchScreen } from '../../ui/components/LaunchScreen';
+import type { User } from '../entities/User';
 
 interface AuthContextValue {
+  user: User | undefined;
   signedIn: boolean;
   signin(accessToken: string): void;
   signout(): void;
@@ -23,7 +25,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const { clear } = new QueryCache();
 
-  const { isError, isFetching, isSuccess } = useQuery({
+  const { data, isError, isFetching, isSuccess } = useQuery({
     queryKey: ['users', 'me'],
     queryFn: () => usersService.me(),
     enabled: signedIn,
@@ -49,7 +51,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <AuthContext.Provider
-      value={{ signedIn: signedIn && isSuccess, signin, signout }}>
+      value={{ signedIn: signedIn && isSuccess, user: data, signin, signout }}>
       <LaunchScreen isLoading={isFetching} />
       {!isFetching && children}
     </AuthContext.Provider>
