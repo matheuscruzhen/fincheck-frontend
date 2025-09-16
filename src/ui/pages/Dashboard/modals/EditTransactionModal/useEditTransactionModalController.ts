@@ -77,7 +77,6 @@ export function useEditTransactionModalController(
       transaction!.type === 'EXPENSE'
         ? toast.success('Despesa excluída com successo.')
         : toast.success('Receita excluída com successo.');
-      close;
       onClose();
     } catch (error) {
       transaction!.type === 'EXPENSE'
