@@ -38,13 +38,13 @@ Before installing and running this project, make sure you have the following:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/matheuscruzhen/fincheck-fe.git
+   git clone https://github.com/matheuscruzhen/fincheck-frontend.git
    ```
 
 2. Browse to the project folder:
 
    ```bash
-   cd fincheck/fe
+   cd fincheck-frontend
    ```
 
 3. Install dependencies:
